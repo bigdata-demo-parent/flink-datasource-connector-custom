@@ -9,7 +9,8 @@ public class MySQLDataSourceDemo {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-        DataStream<User> dataStream = env.addSource(new MySQLDataSource());
+        String sql = "select id, name from user";
+        DataStream<User> dataStream = env.addSource(new MySQLDataSource(sql));
         dataStream.print();
 
         env.execute("Customize DataSource demo : MySQLDataSourceDemo");

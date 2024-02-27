@@ -16,6 +16,12 @@ public class MySQLDataSource extends RichSourceFunction<User> {
 
     private volatile boolean isRunning = true;
 
+    String sql ;
+
+    public MySQLDataSource(String sql) {
+        this.sql = sql;
+    }
+
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
@@ -29,7 +35,6 @@ public class MySQLDataSource extends RichSourceFunction<User> {
         }
 
         if (null == preparedStatement) {
-            String sql = "select id, name from user";
             preparedStatement = connection.prepareStatement(sql);
         }
     }
